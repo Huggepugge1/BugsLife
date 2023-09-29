@@ -1,0 +1,17 @@
+\begin{thebibliography}{1}
+
+\bibitem{dorigo1997ant}
+M.~Dorigo and L.~M. Gambardella, ``Ant colonies for the travelling salesman problem,'' {\em BioSystems}, vol.~43, no.~2, pp.~73--81, 1997.
+
+\bibitem{wiger-complexity}
+U.~Wiger, ``Death by accidental complexity,'' 2010.
+\newblock Tillgänglig på http://www.infoq.com/presentations/Death-by-Accidental-Complexity.
+
+\bibitem{krzyzanowski-ddeadlock}
+P.~Krzyzanowski, ``Distributed deadlock,'' 2012.
+\newblock Tillgänglig på https://www.cs.rutgers.edu/~pxk/417/notes/deadlock.html.
+
+\bibitem{chandy1983distributed}
+K.~M. Chandy, J.~Misra, and L.~M. Haas, ``Distributed deadlock detection,'' {\em {ACM Transactions on Computer Systems (TOCS)}}, vol.~1, no.~2, pp.~144--156, 1983.
+
+\end{thebibliography}
