@@ -29,7 +29,7 @@
 \begin{titlepage}
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines,
-change thickness here
+% change thickness here
 
 \center% Center everything on the page
  
@@ -62,7 +62,7 @@ Aletta \textsc{Nylén}\\ % Your name
 \end{minipage}\\[2cm]
 
 % If you don't want a supervisor,
-uncomment the two lines below and remove the section above
+% uncomment the two lines below and remove the section above
 %\Large \emph{Author:}\\
 %John \textsc{Smith}\\[3cm] % Your name
 
@@ -71,43 +71,51 @@ uncomment the two lines below and remove the section above
 %----------------------------------------------------------------------------------------
 
 {\large \today}\\[2cm] % Date,
-change the \today to a set date if you want to be precise
+% change the \today to a set date if you want to be precise
 
 \vfill % Fill the rest of the page with whitespace
+
+
+% TODO: Related work
+% Swarm intelligence har fått relevans inom datavetenskapen vid lösning av shortest path och travelling salesmanproblemet~\cite{dorigo1997ant}.
+
+
 
 \end{titlepage}
 \section{Inledning}
 \textit{Swarm intelligence} är ett koncept som innebär att en grupp av organismer,
-helt utan en ledare i centrum och endast med begränsad individuell intelligens,
+helt utan en ledare i centrum och endast med begränsad individuell intelligens, 
 i grupp kan lösa komplexa problem.
-Swarm intelligence har fått relevans inom datavetenskapen vid lösning av shortest path och travelling salesmanproblemet~\cite{dorigo1997ant}.
-I projektets inledande stadie så var tanken att simulera ett fält med två myrkolonier som konkurrerar med varandra.
-Det visade sig dock att det var en för invecklad och tidskrävande implementation med två myrstackar så fokus lades istället på att simulera endast en myrkoloni.
-I simulationen kan myrorna hitta utplacerad mat och sedan ta tillbaka den till sitt bo.
-Myrorna hittar vägen till maten och tillbaka med hjälp utav att lämna och följa olika feromoner.
+Till exempel består ett försvar av soldater.
+Varje soldat kan inte göra så mycket själv, men som grupp är soldaterna mycket starkare.
 
+BugsLife är en simulering där myror kan hitta utplacerad mat och sedan ta tillbaka den till sitt bo.
+Genom att lämna feromoner på vägen kan myrorna sedan hitta tillbaka till maten genom att följa sina egna spår.
 Systemet är konstruerat så att det är fullständigt concurrent och arbetar helt utan någon supervisor eller tidssynkronisering.
-Detta har åstadkommits genom att låta varje objekt i simuleringen vara en egen process där all kommunikation mellan processerna sker via message passing.
+Detta har åstadkommits genom att låta varje objekt i simuleringen vara en egen process där all kommunikation mellan processerna sker via meddelandeöverföring.
+Systemet använder sig utav actor-modellen och är fritt från deadlocks.
 
-Detta projekt har utnyttjat actor-modellen kraftigt och genom att använda en del oortodoxa metoder lyckats få koden lätthanterlig och även lyckats göra systemet fritt från deadlocks.
+Genom att simulera enklare
 
 \section{Översikt över systemet}
 Systemet ger användaren möjligheten att observera simuleringen av en virtuell myrkoloni i realtid.
 
 Användaren startar simuleringen utan input-parametrar och systemet körs sedan automatiskt och kräver ingen interaktion från användaren.
 Vid första anblick kan myrkolonin uppfattas som simpel,
-men komplexiteten i simuleringen ligger i systemarkitekturen och de algoritmer myrorna använder sig av för att effektivisera hämtningen av mat
-En skärmdump av simulationen kan ses i figur~\ref{fig:screen-dump}.
+men komplexiteten i simuleringen ligger i systemarkitekturen och de algoritmer myrorna använder sig av för att effektivisera hämtningen av mat.
+En skärmdump av simuleringen kan ses i Figur~\ref{fig:screen-dump}.
 
 \begin{figure}
     \centering
     \includegraphics[width=0.5\textwidth]{BugsLife-Fig1.png}
-    \caption{En skärmdump utav simuleringen.
-    De brun/orangea rutorna är myrbo,
-    de gröna är mat,
-    de bruna/gråa är väggar
-    De små röda rutorna är myror som letar efter mat och de små blåa rutorna är myror som är på väg hem med mat
-    I bakgrunden syns feromonerna.}
+    \caption{
+        En skärmdump utav simuleringen.
+        De brun/orangea rutorna är myrbo,
+        de gröna är mat,
+        de bruna/gråa är väggar.
+        De små röda rutorna är myror som letar efter mat och de små blåa rutorna är myror som är på väg hem med mat.
+        I bakgrunden syns feromonerna.
+    }
     \label{fig:screen-dump}
 \end{figure}
 
@@ -117,12 +125,12 @@ vilket är när ett program styrs av externa händelser som inte går att kontro
 Ett exempel på det är vid programmering av användargränssnitt,
 då det inte går att förutspå när eller i vilken ordning användaren kommer att ge input till systemet.
 
-Vi använder actor-modellen då den ger oss bra möjligheter att på ett konceptuellt och effektivt sätt implementera eventdriven programmering
-Vi kan i actor-modellen fokusera på en modul i taget utan att behöva ta hänsyn till hur de andra modulerna är implementerade.
+Systemet använder sig utav actor-modellen då den ger bra möjligheter att på ett konceptuellt och effektivt sätt implementera eventdriven programmering.
+Actor-modellen ger en möjlighet att fokusera på en modul i taget utan att behöva ta hänsyn till hur de andra modulerna är implementerade.
 Det enda som behövs är ett meddelandeprotokoll som alla moduler följer.
 
-Det är viktigt att påpeka att vi använder asynkron eventdriven programmering
-Detta ger upphov till många problem då vi inte kan garantera att meddelandena kommer i rätt ordning
+Det är viktigt att påpeka att systemet använder sig utav asynkron eventdriven programmering.
+Detta ger upphov till många problem då det inte går att garantera att meddelandena kommer i rätt ordning.
 Problemen löses med hjälp av meddelandefiltrering,
 som innebär att en process väntar på ett specifikt meddelande innan den går vidare och buffrar de meddelanden som kvarstår.
 Varje process behöver då ha ett speciellt tillstånd när den accepterar alla nya förfrågningar.
@@ -196,7 +204,7 @@ modulen är till för debugging och prestandamätning.
 
 \section{Implementation}\label{sec:implementation}
 \subsection{Programmeringsspråk}
-Som programmeringsspråk valdes det att använda Erlang då det är ett väletablerat och stabilt språk som är byggt kring actormodellen och meddelandeöverföring.
+Som programmeringsspråk används Erlang då det är ett väletablerat och stabilt språk som är byggt kring actor-modellen och meddelandeöverföring.
 Utöver Erlang används Python för den grafiska delen och ErlPort\footnote{http://erlport.org/} för kommunikationen mellan Erlang och Python.
 Implementationen av ErlPort har fungerat mycket bra och har gett oss ett smidigt interface mellan Erlang och Python.
 
@@ -239,7 +247,7 @@ Om ett felaktigt eller otillåtet meddelande inkommer under någon del av exekve
 Cellerna kommer vid varje inkommen förfrågan,
 beroende av cellens tillstånd,
 automatiskt genomföra en uppdatering av dess feromonnivåer.
-Detta sker som en funktion av den faktiska tiden(wall-time) som har gått sedan cellen senast uppdaterades.
+Detta sker som en funktion av den faktiska tiden (wall-time) som har gått sedan cellen senast uppdaterades.
 
 Om en cell har attributet block så kan en myra inte gå dit och alla \texttt{place\_ant} förfrågningar kommer att misslyckas.
 
@@ -282,24 +290,27 @@ Grid\_init kommer sedan att initiera en \textit{Queen}\footnote{Queen processen 
 När alla myror har blivit utplacerade så kommer Grid\_init modulen att skicka \texttt{start\_ant} medelanden till myrorna vilket kommer att starta simuleringen.
 
 \subsection{Concurrency}
-Då concurrencyn i vårat program uteslutande bygger på actor-modellen och message passing så har vi definierat tre klasser utav meddelanden.
+Då concurrencyn i systemet uteslutande bygger på actor-modellen och message passing så har systemet tre definierade klasser utav meddelanden.
+
 \begin{itemize}
-    \item One-way meddelanden är på formen \texttt{\{Pid,\{Type,Payload\}\}} eller \texttt{\{Pid,Type\}} One-way meddelanden är meddelanden som inte kommer att resultera i att något svar inkommer.
-    \item Request (förfrågningar) meddelanden är på formen \texttt{\{Pid,Reference,Payload\}} Alla Request-meddelanden resulterar i att processen blockerar och inväntar Replymeddelanden.
-    \item Reply-meddelanden är på formen \texttt{\{Pid,Reference,Request\_Reference,\{Type,Reply\_Payload\}\}}.
-    Reply-meddelanden är de meddelanden som skickas som svar på requests.
+    \item Enkelrikatade meddelanden på formen \\
+    \texttt{\{Pid,\{Type,Payload\}\}} eller \texttt{\{Pid,Type\}} \\
+    Enkelriktade meddelanden är meddelanden som inte kommer att resultera i att något svar inkommer.
+    \item Förfrågningar på formen \\
+    \texttt{\{Pid,Reference,Payload\}} \\
+    Alla förfrågningar resulterar i att processen blockerar och inväntar svarsmeddelanden.
+    \item Svarsmeddelanden på formen \\
+    \texttt{\{Pid,Reference,Request\_Reference,\{Type,Reply\_Payload\}\}} \\
+    Svar är de meddelanden som skickas som svar på förfrågningar.
 \end{itemize}
 
 För alla meddelanden gäller att \texttt{Pid} är process id:t hos den process som skickar meddelandet,
 \texttt{Payload} är vad meddelandet faktiskt innehåller och \texttt{Reference} är en referens som den skickande processen ger meddelandet.
-\texttt{Request\_Reference} är en referens från ett
-request meddelande till vilket detta är ett svar.
+\texttt{Request\_Reference} är en referens från en förfrågning till vilket detta är ett svar.
 
-Då systemet faller under \textit{asynchronous eventdriven programmering} så kan vissa problem uppstå om vi inte är försiktiga med hur vi implementerar systemet.
-Det naiva tillvägagångssättet hade varit en så kallad \textit{Fifo,
-run to completion} metod.
-Detta innebär att man accepterar varje meddelande,
-hanterar det och låter det köra tills det att det är klart innan man hanterar nästa meddelande.
+Då systemet faller under \textit{asynkron eventdriven programmering} så kan vissa problem uppstå om vi inte är försiktiga med hur vi implementerar systemet.
+Det naiva tillvägagångssättet hade varit en så kallad \textit{Fifo, run to completion} metod.
+Detta innebär att man accepterar varje meddelande, hanterar det och låter det köra tills det att det är klart innan man hanterar nästa meddelande.
 Fifo-metoden leder dock till problem med att man måste hålla explicit koll på vilket tillstånd processen är i och ha en plan för hur man ska hantera alla kombinationer av meddelande-tillstånd.
 Detta skulle ha lett till extremt komplicerad och svårhanterlig kod.~\cite{wiger-complexity}
 
@@ -353,8 +364,8 @@ Ni kan se en schematisk beskrivning av algoritmen i figur~\ref{fig:deadlock}.
     \centering
     \includegraphics[width=\textwidth]{BugsLife-Fig4.png}
     \caption{En schematisk överblick över hur meddelandefiltreringen och deadlockhanteringen fungerar.
-\textbf{Refs} är en lista med de referenser från de förfrågningar meddelanden som har skickats.
-\textbf{Pids} är en lista med de Pids som förfrågningarna har skickats till.}
+    \textbf{Refs} är en lista med de referenser från de förfrågningar meddelanden som har skickats.
+    \textbf{Pids} är en lista med de Pids som förfrågningarna har skickats till.}
     \label{fig:deadlock}
 \end{figure}
 
@@ -367,17 +378,13 @@ En för kort timeout kommer att leda till att väldigt många förfrågningar ko
 \section{Slutsatser}
 Vi har lyckats göra en representation av en myrkoloni som samlar mat och kommunicerar med varandra med hjälp av feromoner.
 Myrorna kan även undvika olika hinder och objekt.
-Aven om vi inte riktigt lyckades implementera allt vi hade iåtanke när projektet
-började så är vi nöjda med slutresultatet.
+Aven om vi inte riktigt lyckades implementera allt vi hade iåtanke när projektet började så är vi nöjda med slutresultatet.
 Det är svårt att få en verklig uppfattning av problemen och utmaningarna med ett arbete innan man satt igång med grunden på vilken andra implementationer ska vila.
 Vi bestämde oss för att se till att göra en grundläggande representation av en myrkoloni och se till att denna har god concurrency och en felfri körning,
-detta har vi uppnåt och även utvecklat en grafisk representation Det är detta som vi nämnde tidigare,
-som är vår grund.
+detta har vi uppnåt och även utvecklat en grafisk representation Det är detta som vi nämnde tidigare, som är vår grund.
 På denna grund kan man enkelt bygga ut och genom detta implementera flera funktioner,
-som till exempel flera olika typer av mat,
-fientliga insekter och en konkurrerande myrkoloni.
-Aven om vår första
-tanke var att använda det nya och lite mer spännande språket Nim,
+som till exempel flera olika typer av mat, fientliga insekter och en konkurrerande myrkoloni.
+Aven om vår första tanke var att använda det nya och lite mer spännande språket Nim,
 så är vi nöjda med att vi valde att använda det mer utvecklade och etablerade språket Erlang.
 De verktyg som Erlang har tillgängliga har varit hjälpsamma och det är ett intressant språk att skriva i och actor-modellen är lätthanterlig för den här typen av concurrency.
 

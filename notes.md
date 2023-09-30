@@ -55,5 +55,4 @@
 - [ ] **Språk** - Förklara asynkron
 
 - [x] **Referenser** - Finns men många av de är [?]
-
 - [ ] **Referenser** - "actor-modellen" behöver en referens
