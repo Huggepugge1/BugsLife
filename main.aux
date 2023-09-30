@@ -2,42 +2,60 @@
 \providecommand\babel@aux[2]{}
 \@nameuse{bbl@beforestart}
 \catcode `"\active 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
 \babel@aux{swedish}{}
-\@writefile{toc}{\contentsline {section}{\numberline {1}Inledning}{1}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2}Översikt över systemet}{1}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Concurrency}{1}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces  En skärmdump av simuleringen. De brun/orangea rutorna är myrbo, de gröna är mat, de bruna/gråa är väggar. De små röda rutorna är myror som letar efter mat och de små blåa rutorna är myror som är på väg hem med mat. I bakgrunden syns feromonerna. }}{2}{}\protected@file@percent }
-\newlabel{fig:screen-dump}{{1}{2}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Systemdesign}{3}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.1}Ant}{3}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.2}Cell}{3}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces En schematisk överblick över systemarkitekturen}}{4}{}\protected@file@percent }
-\newlabel{fig:sysark-overview}{{2}{4}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.3}Message\_Buffer}{5}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.4}GUI}{5}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.5}Grid\_Init}{5}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3}Implementation}{5}{}\protected@file@percent }
-\newlabel{sec:implementation}{{3}{5}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Programmeringsspråk}{5}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}GUI}{6}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Erlport}{6}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Pygame}{6}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Ants and Cells}{7}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}Myrans algoritm}{7}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Flowchart över myrans algoritm}}{8}{}\protected@file@percent }
-\newlabel{fig:ant-algorithm}{{3}{8}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.2}Grid\_Init}{8}{}\protected@file@percent }
+\citation{dorigo1997ant}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Inledning}{2}{section.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Relaterat arbete}{2}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Översikt över systemet}{2}{section.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces  En skärmdump av simuleringen. De brun/orangea rutorna är myrbo, de gröna är mat, de bruna/gråa är väggar. De små röda rutorna är myror som letar efter mat och de små blåa rutorna är myror som är på väg hem med mat. I bakgrunden syns feromonerna. }}{3}{figure.1}\protected@file@percent }
+\newlabel{fig:screen-dump}{{1}{3}{En skärmdump av simuleringen. De brun/orangea rutorna är myrbo, de gröna är mat, de bruna/gråa är väggar. De små röda rutorna är myror som letar efter mat och de små blåa rutorna är myror som är på väg hem med mat. I bakgrunden syns feromonerna}{figure.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Concurrency}{3}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Systemdesign}{4}{subsection.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces En schematisk överblick över systemarkitekturen}}{4}{figure.2}\protected@file@percent }
+\newlabel{fig:sysark-overview}{{2}{4}{En schematisk överblick över systemarkitekturen}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Ant}{4}{subsubsection.3.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Cell}{5}{subsubsection.3.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.3}Message\_Buffer}{5}{subsubsection.3.2.3}\protected@file@percent }
+\citation{erlport}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.4}GUI}{6}{subsubsection.3.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.5}Grid\_Init}{6}{subsubsection.3.2.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Implementation}{6}{section.4}\protected@file@percent }
+\newlabel{sec:implementation}{{4}{6}{Implementation}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}GUI}{6}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1}Erlport}{6}{subsubsection.4.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.2}Pygame}{7}{subsubsection.4.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Ants and Cells}{7}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}Myrans algoritm}{8}{subsubsection.4.2.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Flowchart över myrans algoritm}}{9}{figure.3}\protected@file@percent }
+\newlabel{fig:ant-algorithm}{{3}{9}{Flowchart över myrans algoritm}{figure.3}{}}
 \citation{wiger-complexity}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Concurrency}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.2}Grid\_Init}{10}{subsubsection.4.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Concurrency}{10}{subsection.4.3}\protected@file@percent }
 \citation{krzyzanowski-ddeadlock}
 \citation{chandy1983distributed}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.1}Deadlocks}{10}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Slutsatser}{11}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces  En schematisk överblick över hur meddelandefiltreringen och deadlockhanteringen fungerar. \textbf  {Refs} är en lista med de referenser från de förfrågningar meddelanden som har skickats. \textbf  {Pids} är en lista med de Pids som förfrågningarna har skickats till. }}{12}{}\protected@file@percent }
-\newlabel{fig:deadlock}{{4}{12}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1}Deadlocks}{11}{subsubsection.4.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces  En schematisk överblick över hur meddelandefiltreringen och deadlockhanteringen fungerar. \textbf  {Refs} är en lista med de referenser från de förfrågningar meddelanden som har skickats. \textbf  {Pids} är en lista med de Pids som förfrågningarna har skickats till. }}{13}{figure.4}\protected@file@percent }
+\newlabel{fig:deadlock}{{4}{13}{En schematisk överblick över hur meddelandefiltreringen och deadlockhanteringen fungerar. \textbf {Refs} är en lista med de referenser från de förfrågningar meddelanden som har skickats. \textbf {Pids} är en lista med de Pids som förfrågningarna har skickats till}{figure.4}{}}
 \bibstyle{ieeetr}
 \bibdata{refs}
-\bibcite{wiger-complexity}{1}
-\bibcite{krzyzanowski-ddeadlock}{2}
-\bibcite{chandy1983distributed}{3}
-\gdef \@abspage@last{14}
+\bibcite{dorigo1997ant}{1}
+\bibcite{erlport}{2}
+\bibcite{wiger-complexity}{3}
+\bibcite{krzyzanowski-ddeadlock}{4}
+\bibcite{chandy1983distributed}{5}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Slutsatser}{14}{section.5}\protected@file@percent }
+\gdef \@abspage@last{15}

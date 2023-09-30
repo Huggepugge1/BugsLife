@@ -24,8 +24,11 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage[hidelinks]{hyperref}
+\usepackage[all]{hypcap}
 
 \begin{document}
+
 \begin{titlepage}
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines,
@@ -84,6 +87,8 @@ Aletta \textsc{Nylén}\\ % Your name
 
 
 \end{titlepage}
+\tableofcontents
+\newpage
 \section{Inledning}
 \textit{Swarm intelligence} är ett koncept som innebär att en grupp av organismer,
 helt utan en ledare i centrum och endast med begränsad individuell intelligens, 
@@ -101,13 +106,16 @@ Systemet är konstruerat så att det är fullständigt concurrent och arbetar he
 Detta har åstadkommits genom att låta varje objekt i simuleringen vara en egen process där all kommunikation mellan processerna sker via meddelandeöverföring.
 Dessutom använder systemet sig av actor-modellen och är fritt från deadlocks.
 
+\section{Relaterat arbete}
+~\cite{dorigo1997ant}
+
 \section{Översikt över systemet}
 Användaren startar simuleringen utan input-parametrar och systemet körs sedan automatiskt och kräver ingen interaktion från användaren.
 Vid första anblick kan myrkolonin uppfattas som enkel,
 men komplexiteten i simuleringen ligger i systemarkitekturen och de algoritmer myrorna använder sig av för att effektivisera hämtningen av mat.
 En skärmdump av simuleringen kan ses i Figur~\ref{fig:screen-dump}.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{BugsLife-Fig1.png}
     \caption{
@@ -121,13 +129,12 @@ En skärmdump av simuleringen kan ses i Figur~\ref{fig:screen-dump}.
 \end{figure}
 
 \subsection{Concurrency}
-På grund av den höga nivån av autonomitet kombinerat med separationen mellan de olika processerna används så kallad eventdriven programmering,
-vilket är när ett program styrs av externa händelser som inte går att kontrollera eller förutse.
+På grund av den höga nivån av autonomitet kombinerat med separationen mellan de olika processerna används så kallad eventdriven programmering.
+Eventdriven programmering är när ett program styrs av externa händelser som inte går att kontrollera eller förutse.
 Ett exempel på det är vid programmering av användargränssnitt,
 då det inte går att förutspå när eller i vilken ordning användaren kommer att ge input till systemet.
 
-Systemet använder sig av actor-modellen då den ger bra möjligheter att på ett konceptuellt och effektivt sätt implementera eventdriven programmering.
-Actor-modellen ger en möjlighet att fokusera på en modul i taget utan att behöva ta hänsyn till hur de andra modulerna är implementerade.
+Systemet använder sig av actor-modellen då den ger bra möjligheter att på ett konceptuellt och effektivt sätt implementera eventdriven programmering då den ger en möjlighet att fokusera på en modul i taget utan att behöva ta hänsyn till hur de andra modulerna är implementerade.
 Det enda som behövs är ett meddelandeprotokoll som alla moduler följer.
 
 Det är viktigt att påpeka att systemet använder sig av asynkron eventdriven programmering.
@@ -140,21 +147,18 @@ Varje process behöver då ha ett speciellt tillstånd när den accepterar alla 
 I figur~\ref{fig:sysark-overview} syns en schematisk överblick av systemarkitekturen.
 Alla moduler arbetar helt asynkront och all kommunikation mellan modulerna sker via meddelanden.
 
-\subsubsection{Ant}
-Ant-modulen är den modul som implementerar myran.
-Ant-modulen innehåller de funktioner som krävs för att myran skall kunna fatta beslut över hur den ska agera baserat på hur dess omgivning ser ut.
-Myran skickar endast förfrågningar till den cell som den befinner sig på.
-Under normal drift så tar myran aldrig emot några förfrågningar från någon annan process,
-den tar endast emot svar från den cell som den befinner sig i.
-
-Myran kommer på eget bevåg att skicka förfrågningar till den cellen den står på och autonomt att fatta beslut om vilken handling som är lämpligast,
-baserat på den informationen myran har tagit del av.
-
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{BugsLife-Fig2.png}
     \caption{En schematisk överblick över systemarkitekturen}\label{fig:sysark-overview}
 \end{figure}
+
+\subsubsection{Ant}
+Ant-modulen är den modul som implementerar myran.
+Ant-modulen innehåller de funktioner som krävs för att myran skall kunna fatta beslut över hur den ska agera baserat på hur dess omgivning ser ut.
+Detta gör den genom att skicka förfrågningar till den cell myran befinner sig på och sedan använda svaret för att autonomt fatta ett beslut om vilken handling som är lämpligast.
+Under normal drift så tar myran aldrig emot några förfrågningar från någon annan process,
+endast svar från den cell som den befinner sig i.
 
 Ant-modulen är utrustad med funktionalitet så att myran kan analysera den information som ges av grannskapet till cellen den står i.
 Informationen gör det möjligt för myran att fatta ett beslut,
@@ -166,21 +170,16 @@ Finns det feromoner som indikerar till myran att det finns föda i närheten kan
 Myrorna använder sig även av feromoner för att hitta hem till sitt näste.
 
 \subsubsection{Cell}
-Cell-modulen representerar cellerna,
-varje cell är en ruta i det rutnät som utgör världen där myrorna lever.
-En cells primära uppgift är att ta emot och besvara förfrågningar från myran som står på cellen,
-samt de kringliggande cellerna.
-En cell kommer under normal drift aldrig att skicka en begäran till en annan cell,
-förutsatt att det är inte en begäran för att hantera en förfrågan som cellen har tagit emot.
-En cell kan endast skicka förfrågningar till de celler som är i dess direkta grannskap.
-
+Cell-modulen representerar cellerna där varje cell är en ruta i det rutnät som utgör världen där myrorna lever.
 Cellen är det objekt som innehåller den relevanta informationen för systemet.
 En cell innehåller information om vad det är för typ av cell,
-om cellen exempelvis representerar ett myrbo: huruvida det finns mat på cellen,
-vad för intensitet de olika feromonerna har på cellen och om det står en myra på cellen.
-
-Cellerna är de enda objekten som kommunicerar med GUI-modulen.
-När en cell får en förfrågan som förändrar cellens tillstånd skickar cellen ett meddelande till GUI-modulen där den talar om sin position och sitt nya tillstånd.
+om cellen exempelvis representerar ett myrbo, 
+om det finns mat på cellen,
+om det står en myra på cellen 
+samt intensiteten för dem olika feromonerna på cellen.
+Förutom att lagra information hanterar cellen också meddelanden.
+Cellen tar emot och besvarar förfrågningar från myran som står på cellen, tar emot, besvara och skickar förfrågningar till cellerna i dess direkta grannskap samt skickar meddelanden till GUI-modulen.
+Den enda gång en cell kan skicka förfrågningar till en annan cell är om cellen fått en förfrågan att skicka en förfrågan.
 
 \subsubsection{Message\_Buffer}
 Message Buffer är den modul som hanterar kommunikationen av meddelanden mellan processerna.
@@ -194,18 +193,14 @@ Informationen omvandlas till Pythons syntax via Erlport och skickas till en Pyth
 
 \subsubsection{Grid\_Init}
 Modulen används för att bygga upp världen samt placera alla celler och länka ihop dessa.
-Grid Init modulen tilldelar även alla celler dess initiala attribut samt skapar,
-placerar och startar alla myrorna.
-
-I denna modul initieras även en Queen-process,
-denna process binds alla myror till.
+Grid Init modulen tilldelar även alla celler dess initiala attributer samt skapar,
+placerar och startar alla myrorna. Grid init initierar även en Queen-process.
 Myrorna skickar statistik till Queen-processen,
-modulen är till för debugging och prestandamätning.
+som används för debugging och prestandamätning.
 
 \section{Implementation}\label{sec:implementation}
-\subsection{Programmeringsspråk}
-Som programmeringsspråk används Erlang då det är ett väletablerat och stabilt språk som är byggt kring actor-modellen och meddelandeöverföring.
-Utöver Erlang används Python för den grafiska delen och ErlPort\footnote{http://erlport.org/} för kommunikationen mellan Erlang och Python.
+Systemet implementerades i Erlang då det är ett väletablerat och stabilt språk som är byggt kring actor-modellen och meddelandeöverföring.
+Utöver Erlang används Python för den grafiska delen och ErlPort~\cite{erlport} för kommunikationen mellan Erlang och Python.
 Implementationen av ErlPort har fungerat mycket bra och har gett oss ett smidigt interface mellan Erlang och Python.
 
 \subsection{GUI}
@@ -273,11 +268,12 @@ Då myran går tillbaka med mat så kommer den att följa en snarlik algoritm me
 I figur~\ref{fig:ant-algorithm} finns en flow-chart om hur algoritmen ser ut.
 
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{BugsLife-Fig3.png}
     \caption{Flowchart över myrans algoritm}\label{fig:ant-algorithm}
 \end{figure}
+\newpage
 
 \subsubsection{Grid\_Init}
 Grid init är den modul som bygger upp världen.
@@ -359,7 +355,7 @@ skicka automatiska fail-svar till alla inkomna förfrågningar som ligger på de
 Detta kommer att repeteras tills att ett svar har inkommit.
 Ni kan se en schematisk beskrivning av algoritmen i figur~\ref{fig:deadlock}.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{BugsLife-Fig4.png}
     \caption{

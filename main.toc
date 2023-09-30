@@ -1,0 +1,21 @@
+\babel@toc {swedish}{}\relax 
+\contentsline {section}{\numberline {1}Inledning}{2}{section.1}%
+\contentsline {section}{\numberline {2}Relaterat arbete}{2}{section.2}%
+\contentsline {section}{\numberline {3}Översikt över systemet}{2}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Concurrency}{3}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Systemdesign}{4}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Ant}{4}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Cell}{5}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}Message\_Buffer}{5}{subsubsection.3.2.3}%
+\contentsline {subsubsection}{\numberline {3.2.4}GUI}{6}{subsubsection.3.2.4}%
+\contentsline {subsubsection}{\numberline {3.2.5}Grid\_Init}{6}{subsubsection.3.2.5}%
+\contentsline {section}{\numberline {4}Implementation}{6}{section.4}%
+\contentsline {subsection}{\numberline {4.1}GUI}{6}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Erlport}{6}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}Pygame}{7}{subsubsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.2}Ants and Cells}{7}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Myrans algoritm}{8}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}Grid\_Init}{10}{subsubsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.3}Concurrency}{10}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}Deadlocks}{11}{subsubsection.4.3.1}%
+\contentsline {section}{\numberline {5}Slutsatser}{14}{section.5}%
