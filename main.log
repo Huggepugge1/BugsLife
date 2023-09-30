@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.31)  29 SEP 2023 11:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.9.4)  30 SEP 2023 12:17
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**c:/rapport/main.tex
-(c:/rapport/main.tex
+**c:/BugsLife/main.tex
+(c:/BugsLife/main.tex
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-29>
 (c:/texlive/2023/texmf-dist/tex/latex/base/article.cls
@@ -29,7 +29,7 @@ Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
 Package: babel 2023/08/29 v3.93 The Babel package
 \babel@savecnt=\count193
 \U@D=\dimen141
-\l@unhyphenated=\language48
+\l@unhyphenated=\language87
  (c:/texlive/2023/texmf-dist/tex/generic/babel/txtbabel.def)
 \bbl@readstream=\read2
 \bbl@dirlevel=\count194
@@ -175,37 +175,37 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 <Uppsala_University_seal_svg.png, id=1, 1033.8625pt x 1027.84pt>
 File: Uppsala_University_seal_svg.png Graphic file (type png)
 <use Uppsala_University_seal_svg.png>
-Package pdftex.def Info: Uppsala_University_seal_svg.png  used on input line 41.
+Package pdftex.def Info: Uppsala_University_seal_svg.png  used on input line 43.
 (pdftex.def)             Requested size: 103.3923pt x 102.79001pt.
  [1
 
 {c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc} <./Uppsala_University_seal_svg.png>]
-<BugsLife-Fig1.png, id=15, 203.76125pt x 204.765pt>
+<BugsLife-Fig1.png, id=16, 203.76125pt x 204.765pt>
 File: BugsLife-Fig1.png Graphic file (type png)
 <use BugsLife-Fig1.png>
-Package pdftex.def Info: BugsLife-Fig1.png  used on input line 110.
+Package pdftex.def Info: BugsLife-Fig1.png  used on input line 112.
 (pdftex.def)             Requested size: 195.0pt x 195.96912pt.
  [1] [2 <./BugsLife-Fig1.png>]
 <BugsLife-Fig2.png, id=27, 418.56375pt x 347.2975pt>
 File: BugsLife-Fig2.png Graphic file (type png)
 <use BugsLife-Fig2.png>
-Package pdftex.def Info: BugsLife-Fig2.png  used on input line 154.
+Package pdftex.def Info: BugsLife-Fig2.png  used on input line 155.
 (pdftex.def)             Requested size: 390.0pt x 323.59276pt.
- [3 <./BugsLife-Fig2.png>] [4] [5] [6]
+ [3] [4 <./BugsLife-Fig2.png>] [5] [6]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 252.
  (c:/texlive/2023/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
-)
-<BugsLife-Fig3.png, id=46, 436.63126pt x 296.10625pt>
+) [7]
+<BugsLife-Fig3.png, id=50, 436.63126pt x 296.10625pt>
 File: BugsLife-Fig3.png Graphic file (type png)
 <use BugsLife-Fig3.png>
 Package pdftex.def Info: BugsLife-Fig3.png  used on input line 278.
 (pdftex.def)             Requested size: 390.0pt x 264.48254pt.
- [7] [8 <./BugsLife-Fig3.png>] [9{c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [10]
+ [8 <./BugsLife-Fig3.png>] [9{c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [10]
 <BugsLife-Fig4.png, id=62, 428.60126pt x 389.455pt>
 File: BugsLife-Fig4.png Graphic file (type png)
 <use BugsLife-Fig4.png>
-Package pdftex.def Info: BugsLife-Fig4.png  used on input line 365.
+Package pdftex.def Info: BugsLife-Fig4.png  used on input line 364.
 (pdftex.def)             Requested size: 390.0pt x 354.38083pt.
  [11] [12 <./BugsLife-Fig4.png>] (./main.bbl
 Underfull \hbox (badness 3919) in paragraph at lines 8--10
@@ -219,15 +219,15 @@ L3 programming layer <2023-08-29>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 3518 strings out of 476047
- 55439 string characters out of 5784224
+ 3518 strings out of 474934
+ 55442 string characters out of 5763815
  1926801 words of memory out of 5000000
- 24861 multiletter control sequences out of 15000+600000
+ 25033 multiletter control sequences out of 15000+600000
  575125 words of font info for 69 fonts, out of 8000000 for 9000
- 430 hyphenation exceptions out of 8191
- 57i,8n,65p,422b,283s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 1141 hyphenation exceptions out of 8191
+ 57i,8n,65p,425b,291s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1440.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1728.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc2074.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1440.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on main.pdf (14 pages, 630452 bytes).
+Output written on main.pdf (14 pages, 630217 bytes).
 PDF statistics:
  141 PDF objects out of 1000 (max. 8388607)
  83 compressed objects within 1 object stream

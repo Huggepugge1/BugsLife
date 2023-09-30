@@ -36,8 +36,10 @@
   Kontext framgår inte.
 
 - **Related work** \
+  Finns ej 
 
 - **Samhällskoppling** \
+  Finns ej
 
 - **Användbarhetsaspekter** \
 
@@ -49,10 +51,11 @@
 
 
 ## Att göra
-- [ ] **Bakgrund** - Problem framgår inte. Behov framgår inte. Kontext framgår inte.
+- [x] **Bakgrund** - Problem framgår inte. Behov framgår inte. Kontext framgår inte.
+- [x] **Sammhällskoppling** - Det framgår inte hur detta hjälper samhället.
 
 - [ ] **Språk** - ***VI*** måste tas bor måste tas bort
-- [ ] **Språk** - Förklara asynkron
 
 - [x] **Referenser** - Finns men många av de är [?]
 - [ ] **Referenser** - "actor-modellen" behöver en referens
+- [ ] **Referenser** - Kombinera inte fotnoter med [X]

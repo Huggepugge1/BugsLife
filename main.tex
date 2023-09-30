@@ -29,7 +29,9 @@
 \begin{titlepage}
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines,
-% change thickness here
+change thickness here
+
+\center%% change thickness here
 
 \center% Center everything on the page
  
@@ -88,20 +90,20 @@ helt utan en ledare i centrum och endast med begränsad individuell intelligens,
 i grupp kan lösa komplexa problem.
 Till exempel består ett försvar av soldater.
 Varje soldat kan inte göra så mycket själv, men som grupp är soldaterna mycket starkare.
+Något annat man kan göra är att simulera idrottslag.
+Till exempel kan man simulera hur fotbollsspelare borde röra sig på en spelplan för att hjälpa varandra och få ut mer av sitt spel.
+Med avancerade varianter av swarm intelligence kan man räkna ut hur man optimalt kan röra sig för att få så stort övertag som möjligt.
+Genom att simulera enklare varianter av swarm intelligence kan man dra lärdomar som senare kan användas för att simulera mer komplicerade varianter.
 
 BugsLife är en simulering där myror kan hitta utplacerad mat och sedan ta tillbaka den till sitt bo.
 Genom att lämna feromoner på vägen kan myrorna sedan hitta tillbaka till maten genom att följa sina egna spår.
 Systemet är konstruerat så att det är fullständigt concurrent och arbetar helt utan någon supervisor eller tidssynkronisering.
 Detta har åstadkommits genom att låta varje objekt i simuleringen vara en egen process där all kommunikation mellan processerna sker via meddelandeöverföring.
-Systemet använder sig utav actor-modellen och är fritt från deadlocks.
-
-Genom att simulera enklare
+Dessutom använder systemet sig av actor-modellen och är fritt från deadlocks.
 
 \section{Översikt över systemet}
-Systemet ger användaren möjligheten att observera simuleringen av en virtuell myrkoloni i realtid.
-
 Användaren startar simuleringen utan input-parametrar och systemet körs sedan automatiskt och kräver ingen interaktion från användaren.
-Vid första anblick kan myrkolonin uppfattas som simpel,
+Vid första anblick kan myrkolonin uppfattas som enkel,
 men komplexiteten i simuleringen ligger i systemarkitekturen och de algoritmer myrorna använder sig av för att effektivisera hämtningen av mat.
 En skärmdump av simuleringen kan ses i Figur~\ref{fig:screen-dump}.
 
@@ -109,14 +111,13 @@ En skärmdump av simuleringen kan ses i Figur~\ref{fig:screen-dump}.
     \centering
     \includegraphics[width=0.5\textwidth]{BugsLife-Fig1.png}
     \caption{
-        En skärmdump utav simuleringen.
+        En skärmdump av simuleringen.
         De brun/orangea rutorna är myrbo,
         de gröna är mat,
         de bruna/gråa är väggar.
         De små röda rutorna är myror som letar efter mat och de små blåa rutorna är myror som är på väg hem med mat.
         I bakgrunden syns feromonerna.
-    }
-    \label{fig:screen-dump}
+    }\label{fig:screen-dump}
 \end{figure}
 
 \subsection{Concurrency}
@@ -125,11 +126,11 @@ vilket är när ett program styrs av externa händelser som inte går att kontro
 Ett exempel på det är vid programmering av användargränssnitt,
 då det inte går att förutspå när eller i vilken ordning användaren kommer att ge input till systemet.
 
-Systemet använder sig utav actor-modellen då den ger bra möjligheter att på ett konceptuellt och effektivt sätt implementera eventdriven programmering.
+Systemet använder sig av actor-modellen då den ger bra möjligheter att på ett konceptuellt och effektivt sätt implementera eventdriven programmering.
 Actor-modellen ger en möjlighet att fokusera på en modul i taget utan att behöva ta hänsyn till hur de andra modulerna är implementerade.
 Det enda som behövs är ett meddelandeprotokoll som alla moduler följer.
 
-Det är viktigt att påpeka att systemet använder sig utav asynkron eventdriven programmering.
+Det är viktigt att påpeka att systemet använder sig av asynkron eventdriven programmering.
 Detta ger upphov till många problem då det inte går att garantera att meddelandena kommer i rätt ordning.
 Problemen löses med hjälp av meddelandefiltrering,
 som innebär att en process väntar på ett specifikt meddelande innan den går vidare och buffrar de meddelanden som kvarstår.
@@ -152,8 +153,7 @@ baserat på den informationen myran har tagit del av.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{BugsLife-Fig2.png}
-    \caption{En schematisk överblick över systemarkitekturen}
-    \label{fig:sysark-overview}
+    \caption{En schematisk överblick över systemarkitekturen}\label{fig:sysark-overview}
 \end{figure}
 
 Ant-modulen är utrustad med funktionalitet så att myran kan analysera den information som ges av grannskapet till cellen den står i.
@@ -233,7 +233,7 @@ Pygames design gör att det är enkelt att använda på alla plattformar som har
 
 \subsection{Ants and Cells}
 Ant-modulen och Cell-modulen är väldigt lika varandra i sin implementation.
-Båda modulerna består utav en initialiseringsfunktion som används för att starta processer.
+Båda modulerna består av en initialiseringsfunktion som används för att starta processer.
 Funktionen inväntar de meddelanden som är nödvändiga för att starta processerna.
 Detta kan till exempel vara ett meddelande om att myran har placerats korrekt och att cellerna har fått sitt grannskap definierat.
 
@@ -268,7 +268,7 @@ Om den inte väljer den riktningen så kommer den att gå till den cellen med n�
 Myran kommer efter varje genomförd förflyttning att släppa feromoner på den cellen där den tidigare var.
 Då myran letar efter mat kommer den att släppa \texttt{base\_feremone} och då den går tillbaka med maten så kommer den att släppa \texttt{food\_feremone}.
 
-Då myran går tillbaka med mat så kommer den att följa en snarlik algoritm men istället leta efter den högsta koncentrationen utav \texttt{base\_feremone}.
+Då myran går tillbaka med mat så kommer den att följa en snarlik algoritm men istället leta efter den högsta koncentrationen av \texttt{base\_feremone}.
 
 I figur~\ref{fig:ant-algorithm} finns en flow-chart om hur algoritmen ser ut.
 
@@ -276,8 +276,7 @@ I figur~\ref{fig:ant-algorithm} finns en flow-chart om hur algoritmen ser ut.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{BugsLife-Fig3.png}
-    \caption{Flowchart över myrans algoritm}
-    \label{fig:ant-algorithm}
+    \caption{Flowchart över myrans algoritm}\label{fig:ant-algorithm}
 \end{figure}
 
 \subsubsection{Grid\_Init}
@@ -290,7 +289,7 @@ Grid\_init kommer sedan att initiera en \textit{Queen}\footnote{Queen processen 
 När alla myror har blivit utplacerade så kommer Grid\_init modulen att skicka \texttt{start\_ant} medelanden till myrorna vilket kommer att starta simuleringen.
 
 \subsection{Concurrency}
-Då concurrencyn i systemet uteslutande bygger på actor-modellen och message passing så har systemet tre definierade klasser utav meddelanden.
+Då concurrencyn i systemet uteslutande bygger på actor-modellen och message passing så har systemet tre definierade klasser av meddelanden.
 
 \begin{itemize}
     \item Enkelrikatade meddelanden på formen \\
@@ -353,7 +352,7 @@ Det kan finnas ytterligare begränsningar som har missats då de inte är applic
 Aven då dessa predikat
 kan förefalla vara hårda så innebär inte det att funktionaliteten drabbas signifikant.
 De tillåter att en process som väntar på ett svar fortfarande kan hantera vissa meddelanden och skicka nya förfrågningar till processer.
-De tillåter även att man implementerar en prioritering utav olika typer av förfrågningar eller olika typer av processer.
+De tillåter även att man implementerar en prioritering av olika typer av förfrågningar eller olika typer av processer.
 
 När en process väntar på svar från en annan process så kommer den att efter en viss förutbestämd tid (timeout),
 skicka automatiska fail-svar till alla inkomna förfrågningar som ligger på dess meddelande-buffer.
@@ -363,16 +362,17 @@ Ni kan se en schematisk beskrivning av algoritmen i figur~\ref{fig:deadlock}.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{BugsLife-Fig4.png}
-    \caption{En schematisk överblick över hur meddelandefiltreringen och deadlockhanteringen fungerar.
-    \textbf{Refs} är en lista med de referenser från de förfrågningar meddelanden som har skickats.
-    \textbf{Pids} är en lista med de Pids som förfrågningarna har skickats till.}
-    \label{fig:deadlock}
+    \caption{
+        En schematisk överblick över hur meddelandefiltreringen och deadlockhanteringen fungerar.
+        \textbf{Refs} är en lista med de referenser från de förfrågningar meddelanden som har skickats.
+        \textbf{Pids} är en lista med de Pids som förfrågningarna har skickats till.
+    }\label{fig:deadlock}
 \end{figure}
 
 Vår metod har dock den nackdelen att den ofta kommer att upptäcka falska deadlocks,
 det vill säga att den kommer att tro att det finns ett deadlock när det inte gör det och i onödan avvisa vissa förfrågningar.
 Detta leder till att \textbf{Timeout} parametern måste finjusteras.
-En timeout som är för lång kommer innebära att deadlocks kommer att ligga kvar för länge innan de upptäcks och delar utav simuleringen kommer att lagga.
+En timeout som är för lång kommer innebära att deadlocks kommer att ligga kvar för länge innan de upptäcks och delar av simuleringen kommer att lagga.
 En för kort timeout kommer att leda till att väldigt många förfrågningar kommer att avisas i onödan vilket också kan påverka systemets prestanda.
 
 \section{Slutsatser}
@@ -385,10 +385,7 @@ detta har vi uppnåt och även utvecklat en grafisk representation Det är detta
 På denna grund kan man enkelt bygga ut och genom detta implementera flera funktioner,
 som till exempel flera olika typer av mat, fientliga insekter och en konkurrerande myrkoloni.
 Aven om vår första tanke var att använda det nya och lite mer spännande språket Nim,
-så är vi nöjda med att vi valde att använda det mer utvecklade och etablerade språket Erlang.
-De verktyg som Erlang har tillgängliga har varit hjälpsamma och det är ett intressant språk att skriva i och actor-modellen är lätthanterlig för den här typen av concurrency.
-
-Sammanfattningsvis så har systemet levt upp till de förväntningar som gruppen hade haft i projektets tidiga stadie.
+adie.
 
 \bibliographystyle{ieeetr}
 \bibliography{refs}
