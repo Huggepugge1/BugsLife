@@ -1,19 +1,19 @@
 # Fdb version 4
-["bibtex main"] 1696177232 "main.aux" "main.bbl" "main" 1696177234 0
+["bibtex main"] 1696177425 "main.aux" "main.bbl" "main" 1696177427 0
   "./refs.bib" 1696151821 1160 28212b7ec6883bd5dc830835a805b86b ""
   "c:/texlive/2023/texmf-dist/bibtex/bst/ieeetran/IEEEtran.bst" 1693845449 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "main.aux" 1696177233 5160 245f8580cc20e986f1184d194d82c718 "pdflatex"
+  "main.aux" 1696177426 5160 245f8580cc20e986f1184d194d82c718 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1696177232 "c:/BugsLife/main.tex" "main.pdf" "main" 1696177234 0
+["pdflatex"] 1696177425 "c:/BugsLife/main.tex" "main.pdf" "main" 1696177427 0
   "BugsLife-Fig1.png" 1695717200 9862 1fcbe6a7e656940d4710955814e2d567 ""
   "BugsLife-Fig2.png" 1695717200 44101 4693173b4c35dae42fba34c5badd3e2f ""
   "BugsLife-Fig3.png" 1695717200 75956 f5084f03a41157fc72081cf1219302b4 ""
   "BugsLife-Fig4.png" 1695717200 69506 269da315594ccbcf62c6b79a0607de59 ""
   "Uppsala_University_seal_svg.png" 1695717200 310687 936db1361435aa80a155709c27b80d94 ""
-  "c:/BugsLife/main.tex" 1696177230 22986 060c559680ef595ddd1a46e5d1cd36e0 ""
+  "c:/BugsLife/main.tex" 1696177423 23175 544627905f966d38d269fc26aa16f28a ""
   "c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1693844862 2971 def0b6c1f0b107b3b936def894055589 ""
   "c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1693844862 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "c:/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1693845249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -118,11 +118,11 @@
   "c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1693846866 4703409 e46c3309a9f3771bafa9db35dbaa267a ""
   "c:/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1693846975 8183624 c547506a4bf7297c8552dd99ad543f71 ""
   "c:/texlive/2023/texmf.cnf" 1693846854 713 e69b156964470283e0530f5060668171 ""
-  "main.aux" 1696177233 5160 245f8580cc20e986f1184d194d82c718 "pdflatex"
-  "main.bbl" 1696177232 1506 c5533f5d3c64ae42a6afc1b79c0be206 "bibtex main"
-  "main.out" 1696177233 2267 bb93cf98024997979fa0b16527dd1002 "pdflatex"
-  "main.tex" 1696177230 22986 060c559680ef595ddd1a46e5d1cd36e0 ""
-  "main.toc" 1696177233 1547 0c8b61098ad1f75c1db6408179ed6d03 "pdflatex"
+  "main.aux" 1696177426 5160 245f8580cc20e986f1184d194d82c718 "pdflatex"
+  "main.bbl" 1696177425 1506 c5533f5d3c64ae42a6afc1b79c0be206 "bibtex main"
+  "main.out" 1696177426 2267 bb93cf98024997979fa0b16527dd1002 "pdflatex"
+  "main.tex" 1696177423 23175 544627905f966d38d269fc26aa16f28a ""
+  "main.toc" 1696177426 1547 0c8b61098ad1f75c1db6408179ed6d03 "pdflatex"
   (generated)
   "main.aux"
   "main.log"
