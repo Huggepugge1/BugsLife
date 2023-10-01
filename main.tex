@@ -107,13 +107,17 @@ Detta har åstadkommits genom att låta varje objekt i simuleringen vara en egen
 Dessutom använder systemet sig av actor-modellen och är fritt från deadlocks.
 
 \section{Relaterat arbete}
-~\cite{dorigo1997ant}
+% Traveling salesman 
+Probelmet med den resande säljaren (traveling salesman problem, TSP) handlar om att hitta korsatste vägen mellan ett antal städer i en graf där städerna är noder och kopplingar mellan städerna är kanter.
+Problemet kan lösas med hjälp av artificiella myror~\cite{dorigo1997ant}.
+Man börjar med att placera ut myror i slumpmässigt utvalda städer.
+Sedan får myrorna utforska grafen genom att gå och släppa ferormoner längs kanterna.
+
 
 \section{Översikt över systemet}
 Användaren startar simuleringen utan input-parametrar och systemet körs sedan automatiskt och kräver ingen interaktion från användaren.
 Vid första anblick kan myrkolonin uppfattas som enkel,
 men komplexiteten i simuleringen ligger i systemarkitekturen och de algoritmer myrorna använder sig av för att effektivisera hämtningen av mat.
-En skärmdump av simuleringen kan ses i Figur~\ref{fig:screen-dump}.
 
 \begin{figure}[H]
     \centering
@@ -144,8 +148,7 @@ som innebär att en process väntar på ett specifikt meddelande innan den går 
 Varje process behöver då ha ett speciellt tillstånd när den accepterar alla nya förfrågningar.
 
 \subsection{Systemdesign}
-I figur~\ref{fig:sysark-overview} syns en schematisk överblick av systemarkitekturen.
-Alla moduler arbetar helt asynkront och all kommunikation mellan modulerna sker via meddelanden.
+Systemet är uppbygt i moduler där alla moduler arbetar helt asynkront och all kommunikation mellan modulerna sker via meddelanden.
 
 \begin{figure}[H]
     \centering
@@ -200,33 +203,21 @@ som används för debugging och prestandamätning.
 
 \section{Implementation}\label{sec:implementation}
 Systemet implementerades i Erlang då det är ett väletablerat och stabilt språk som är byggt kring actor-modellen och meddelandeöverföring.
-Utöver Erlang används Python för den grafiska delen och ErlPort~\cite{erlport} för kommunikationen mellan Erlang och Python.
-Implementationen av ErlPort har fungerat mycket bra och har gett oss ett smidigt interface mellan Erlang och Python.
+Utöver Erlang används Python för den grafiska delen.
+För att kunna kommunicera mellan de två språken används ErlPort~\cite{erlport}.
 
 \subsection{GUI}
-GUI-modulen initieras med att skapa en lista motsvarande hela griden,
-den fylls med tomma atomer som Python-modulen inte ritar ut.
-GUI-modulen körs i en main loop som tar emot meddelanden från cell-modulerna,
-bearbetar dessa och fyller på den initierade listan.
-
-En algoritm används för att fördela listan på rätt X och Y koordinater,
-koordinaterna är angivna i meddelandet från cellen.
+GUI-modulen initieras med att skapa en lista motsvarande hela griden som fylls med tomma atomer.
+GUI-modulen körs sedan i en main loop som tar emot meddelanden från cell-modulerna,
+bearbetar dessa och fyller på den listan. 
+När GUI-modulen tar emot ett meddelande från en cell används en algoritm för att uppdatera listan.
 Listan skickas via ErlPort till Python där den ritas upp grafiskt.
 
-\subsubsection{Erlport}
-Erlport är ett bibliotek som gör det möjligt för Erlang att kommunicera med andra programmeringsspråk.
-I dagsläget har Erlport stöd för Python och Ruby.
-
-För att Erlport ska kunna kommunicera med Python så skapas först en Python-instans.
-En Python-instans är i princip en OS-process som representeras i Erlang av en Erlang process.
-Man kan skicka och ta emot medelanden mellan Erlang och Python på samma sätt som man skickar meddelanden mellan vanliga processer i Erlang.
-
-\subsubsection{Pygame}
-För den grafiska renderingen i projektet används det community-utvecklade Pythonbiblioteket Pygame.
+För den grafiska renderingen i projektet används Pythonbiblioteket Pygame.
 Pygame är ett bibliotek av färdigutvecklade moduler till Python designade för att enkelt kunna skapa spel med en enkel grafisk implementation.
 Pygames design gör att det är enkelt att använda på alla plattformar som har stöd för Python.
 
-\subsection{Ants and Cells}
+\subsection{Ant-modulen och Cell-modulen}
 Ant-modulen och Cell-modulen är väldigt lika varandra i sin implementation.
 Båda modulerna består av en initialiseringsfunktion som används för att starta processer.
 Funktionen inväntar de meddelanden som är nödvändiga för att starta processerna.
@@ -244,13 +235,10 @@ beroende av cellens tillstånd,
 automatiskt genomföra en uppdatering av dess feromonnivåer.
 Detta sker som en funktion av den faktiska tiden (wall-time) som har gått sedan cellen senast uppdaterades.
 
-Om en cell har attributet block så kan en myra inte gå dit och alla \texttt{place\_ant} förfrågningar kommer att misslyckas.
-
 \subsubsection{Myrans algoritm}
-Myran beslut baseras på en väldigt enkel algoritm.
+Myrans beslut baseras på en väldigt enkel algoritm.
 Myran kan vara i två olika tillstånd \texttt{searching\_for\_food} och \texttt{returning\_with\_food}.
-
-När myran letar efter mat så kommer den att undersöka cellen den står i,
+När myran letar efter mat, har tillståndet \texttt{searching\_for\_food}, så kommer den att undersöka cellen den står i,
 om det finns mat i cellen så kommer myran att försöka plocka upp maten.
 Om myran lyckas plocka upp mat kommer den att byta tillstånd till \texttt{returning\_with\_food},
 om myran misslyckas med att plocka upp mat så kommer den att fortsätta leta efter mat i andra celler.
@@ -262,10 +250,7 @@ Om den inte väljer den riktningen så kommer den att gå till den cellen med n�
 
 Myran kommer efter varje genomförd förflyttning att släppa feromoner på den cellen där den tidigare var.
 Då myran letar efter mat kommer den att släppa \texttt{base\_feremone} och då den går tillbaka med maten så kommer den att släppa \texttt{food\_feremone}.
-
 Då myran går tillbaka med mat så kommer den att följa en snarlik algoritm men istället leta efter den högsta koncentrationen av \texttt{base\_feremone}.
-
-I figur~\ref{fig:ant-algorithm} finns en flow-chart om hur algoritmen ser ut.
 
 
 \begin{figure}[H]
@@ -273,7 +258,6 @@ I figur~\ref{fig:ant-algorithm} finns en flow-chart om hur algoritmen ser ut.
     \includegraphics[width=\textwidth]{BugsLife-Fig3.png}
     \caption{Flowchart över myrans algoritm}\label{fig:ant-algorithm}
 \end{figure}
-\newpage
 
 \subsubsection{Grid\_Init}
 Grid init är den modul som bygger upp världen.
@@ -281,7 +265,7 @@ Det första som den modulen gör är att den startar alla cell-processer.
 Det krävs att GUI-modulen är startad,
 dess PID kommer att skickas med till alla celler.
 Den kommer sedan att skicka ut \texttt{set\_cell\_attribute} medelanden till alla dessa celler med cellernas attribut.
-Grid\_init kommer sedan att initiera en \textit{Queen}\footnote{Queen processen samlar in statistik från myrorna och används endast för debugging och testning.} process och starta alla myror och försöka placera ut dem på de celler där de skall starta.
+Grid\_init kommer sedan att initiera en \textit{Queen}-process, starta alla myror och försöka placera ut dem på de celler där de skall starta.
 När alla myror har blivit utplacerade så kommer Grid\_init modulen att skicka \texttt{start\_ant} medelanden till myrorna vilket kommer att starta simuleringen.
 
 \subsection{Concurrency}
@@ -301,59 +285,35 @@ Då concurrencyn i systemet uteslutande bygger på actor-modellen och message pa
 
 För alla meddelanden gäller att \texttt{Pid} är process id:t hos den process som skickar meddelandet,
 \texttt{Payload} är vad meddelandet faktiskt innehåller och \texttt{Reference} är en referens som den skickande processen ger meddelandet.
-\texttt{Request\_Reference} är en referens från en förfrågning till vilket detta är ett svar.
+\texttt{Request\_Reference} är en referens från en förfrågning som sedan skickas med svaret.
+På så sätt kan systemet veta vilken förfrågan svaret svarar på.
 
-Då systemet faller under \textit{asynkron eventdriven programmering} så kan vissa problem uppstå om vi inte är försiktiga med hur vi implementerar systemet.
-Det naiva tillvägagångssättet hade varit en så kallad \textit{Fifo, run to completion} metod.
-Detta innebär att man accepterar varje meddelande, hanterar det och låter det köra tills det att det är klart innan man hanterar nästa meddelande.
-Fifo-metoden leder dock till problem med att man måste hålla explicit koll på vilket tillstånd processen är i och ha en plan för hur man ska hantera alla kombinationer av meddelande-tillstånd.
-Detta skulle ha lett till extremt komplicerad och svårhanterlig kod.~\cite{wiger-complexity}
+Då systemet faller under \textit{asynkron eventdriven programmering} så kan vissa problem uppstå då det inte är säkert vilka och i vilken ordning meddelanden kommer hanteras.
+Lösningen på detta är att använda olika tillstånd.
+Processens tillståndet dikterar vilka meddelanden som processen kommer att hantera.
+Sedan passeras meddelandena genom ett meddelandefilter som returnerar rätt meddelande (baserat på meddelandets unika tag/referens) och alla andra meddelanden som inkommer läggs på en buffer så att de senare kan hanteras.
 
-Lösningen på detta är att använda vad vi kallar för \textit{state-driven message handling},
-vilket är att vi låter en process tillstånd diktera vilka meddelanden som den kommer att hantera.
-Det vi gör är att vi implementerar ett meddelandefilter som bara returnerar rätt meddelande (baserat på meddelandets unika tag/referens) och alla andra meddelanden som inkommer läggs på en buffer så att de senare kan hanteras.
-
-Detta leder till att koden blir kortare och lättare att underhålla då vi på ett lätt sätt kan hantera hur systemet beter sig.
+Detta leder till att koden blir kortare och lättare att underhålla.
 Det finns dock ett krav på att alla processer måste ha ett eller flera tillstånd då de accepterar nya meddelanden.
 I detta tillstånd kommer meddelanden som ligger på buffern att hanteras först och när buffern är tom kommer de nya meddelandena att hanteras.
 
 \subsubsection{Deadlocks}
-Simuleringen är full av deadlocks och de uppstår ofta.
-Därför behövs ett system för att upptäcka och lösa dessa.
-
-För enklare deadlocks går detta att lösa effektivt och deterministiskt.
-Om en process väntar på svar på en förfrågan så kommer den att blockera.
-Om en process väntar på ett svar från en annan process men får en förfrågan från den processen innan den har fått svar så har ett deadlock uppstått.
-Processen som upptäcker att ett deadlock har uppstått kommer direkt att ge svar om misslyckande till den förfrågan som orsakade deadlocken.
-Det leder till att den andra processen kommer sluta blockera och förfrågan kan därefter hanteras.
-Detta förutsätter att det alltid är tillåtet för en förfrågan att misslyckas och att en process alltid kommer efter en finit tid kunna hantera nya förfrågningar efter det att en förfrågan har misslyckats.
-
-Den här metoden kan bara endast lösa deadlocks som uppstår mellan två processer,
-men systemet drabbas ständigt av mer komplicerade deadlocks.
-
-För att lösa mer komplicerade distribuerade deadlocks skapades en metod som är väldigt simpel men mycket effektiv.
-Metoden löser alla deadlocks helt automtiskt och kräver inte att några rollbacks måste genomföras eller analys av det globala tillståndet med en Wait-For-graf.~\cite{krzyzanowski-ddeadlock}
-Metod kräver inte heller att några probe meddelanden skickas mellan processerana som i Chandy-Misra-Haas algoritmen.~\cite{chandy1983distributed}
-
-Dock så predikeras vår metod på en uppsättning krav på systemet.
-
+För att lösa problemet med distribuerade deadlocks använder systemet en metod som är väldigt simpel men mycket effektiv.
+Metoden löser alla deadlocks helt automtiskt och kräver inte att några rollbacks måste genomföras eller analys av det globala tillståndet med en Wait-For-graf~\cite{krzyzanowski-ddeadlock}.
+Metod kräver inte heller att några probe meddelanden skickas mellan processerana som i Chandy-Misra-Haas algoritmen~\cite{chandy1983distributed}.
+Dock så kräver metoden ett antal krav på systemet för att fungera.
 \begin{itemize}
     \item Alla förfrågningar kan misslyckas på ett väldefinierat sätt.
     \item Alla processer kommer att invänta ett svar efter en förfrågan har skickats.
     \item Från det att ett svar på en förfrågan har inkommit kommer processen alltid att inom en finit tid drivas till ett tillstånd där den accepterar inkommande förfrågningar.
 \end{itemize}
 
-Dessa är en uppsättning preliminära predikat.
-Det kan finnas ytterligare begränsningar som har missats då de inte är applicerbara på vårt system.
-Aven då dessa predikat
-kan förefalla vara hårda så innebär inte det att funktionaliteten drabbas signifikant.
-De tillåter att en process som väntar på ett svar fortfarande kan hantera vissa meddelanden och skicka nya förfrågningar till processer.
+Kraven tillåter att en process som väntar på ett svar fortfarande kan hantera vissa meddelanden och skicka nya förfrågningar till processer.
 De tillåter även att man implementerar en prioritering av olika typer av förfrågningar eller olika typer av processer.
 
 När en process väntar på svar från en annan process så kommer den att efter en viss förutbestämd tid (timeout),
 skicka automatiska fail-svar till alla inkomna förfrågningar som ligger på dess meddelande-buffer.
 Detta kommer att repeteras tills att ett svar har inkommit.
-Ni kan se en schematisk beskrivning av algoritmen i figur~\ref{fig:deadlock}.
 
 \begin{figure}[H]
     \centering
@@ -365,24 +325,47 @@ Ni kan se en schematisk beskrivning av algoritmen i figur~\ref{fig:deadlock}.
     }\label{fig:deadlock}
 \end{figure}
 
-Vår metod har dock den nackdelen att den ofta kommer att upptäcka falska deadlocks,
-det vill säga att den kommer att tro att det finns ett deadlock när det inte gör det och i onödan avvisa vissa förfrågningar.
-Detta leder till att \textbf{Timeout} parametern måste finjusteras.
+\section{Avslutning}
+% Sammanfattning
+BugsLife är en simulering av en myrkoloni.
+Systemet är fullständigt concurrent och drabbas inte av deadlocks.
+Detta gör att simuleringen känns naturlig och smidig vilket i sin tur gör den intuitiv att använda.
+
+\subsection{Diskussion och slutsats}
+Systemet är speciellt då det endast simluerar en myrkoloni.
+Detta gör att man kan studera skillnader i hur myrorna beter sig i en miljö där de har respektive inte har konkurrens.
+
+% Deadlocks
+Metoden för att undvika deadlocks upptäcker ofta falska deadlocks,
+det vill säga att den kommer att tro att det finns ett deadlock när det inte gör det.
+Detta i sin tur leder till att systemet avvisar vissa förfrågningar som det inte ska.
+För att fixa detta måste timeout pararmetern vara lagomt lång.
 En timeout som är för lång kommer innebära att deadlocks kommer att ligga kvar för länge innan de upptäcks och delar av simuleringen kommer att lagga.
 En för kort timeout kommer att leda till att väldigt många förfrågningar kommer att avisas i onödan vilket också kan påverka systemets prestanda.
+Om metoden att hitta deadlocks inte avvisade meddelanden felaktigt skulle systemet vara snabbare.
 
-\section{Slutsatser}
-Vi har lyckats göra en representation av en myrkoloni som samlar mat och kommunicerar med varandra med hjälp av feromoner.
-Myrorna kan även undvika olika hinder och objekt.
-Aven om vi inte riktigt lyckades implementera allt vi hade iåtanke när projektet började så är vi nöjda med slutresultatet.
-Det är svårt att få en verklig uppfattning av problemen och utmaningarna med ett arbete innan man satt igång med grunden på vilken andra implementationer ska vila.
-Vi bestämde oss för att se till att göra en grundläggande representation av en myrkoloni och se till att denna har god concurrency och en felfri körning,
-detta har vi uppnåt och även utvecklat en grafisk representation Det är detta som vi nämnde tidigare, som är vår grund.
-På denna grund kan man enkelt bygga ut och genom detta implementera flera funktioner,
-som till exempel flera olika typer av mat, fientliga insekter och en konkurrerande myrkoloni.
-Aven om vår första tanke var att använda det nya och lite mer spännande språket Nim,
-adie.
+% Vidareutvecklingar
+Som vidareutveckling skulle man till exempel kunna använda sig av flera olika typer av mat.
+Beroende på vilken typ av mat det var skulle myrorna till exempel kunna skicka ut mer feromoner eller en annan typ av feromoner.
+Något annat man kan lägga till är fientliga insekter eller en konkurrerande myrkoloni.
+Detta skulle vara användbart då man får en mer realistisk simulering.
+Detta är mer likt simuleringar av till exempel soldater som rör sig mot en motståndare.
+Man kan också göra simuleringen interagerbar i realtid.
+Detta skulle innebära att man kan simulera yttre faktorer myrorna inte har någon kontroll över.
+Till exempel skulle man kunna simulera att en sten ramlade någonstans.
+Om det finns ett nytt hinder skulle myrorna behöva lista ut hur man tar sig runt det.
 
-\bibliographystyle{ieeetr}
+% Etiska aspekter
+Om stystemet skulle utvecklas vidare för att simluera soldater finns en del etiska aspekter att ta hänsyn till.
+Simuleringarna skulle kanske ge övertag i krig för den som använde det.
+Ifall simuleringen är felaktig finns det risk att många soldater dör då det som hände i simuleringen var annorlunda från verkligheten.
+Att använda systemet för att dra slutsatser om hur djur agerar skulle innebära att man inte behöver testa på verkliga djur.
+Detta i sin tur skulle leda till mindre djurförsök.
+Dock så är det inte säkert att verkliga djur skulle bete sig likadant som i simuleringen.
+Detta skulle innebära att man publicerar falska resultat.
+Att publicera falska resultat är ett problem av flera orsaker, 
+till exempel förlorar både författaren och utgivaren trovärdighet.
+
+\bibliographystyle{IEEEtran}
 \bibliography{refs}
 \end{document}

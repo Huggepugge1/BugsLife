@@ -42,20 +42,43 @@
   Finns ej
 
 - **Användbarhetsaspekter** \
+  Finns lite grann, behöver nog inte lägga till mer, kanske interaktion i realtid som vidareutvekling
 
 - **Hållbarhetsaspekter** \
+  Finns ej
+- **Etiska aspekter** \
+  Finns ej
 
- - **Etiska aspekter** \
-
- - **Tänkbara vidareutvecklingar**
+- **Tänkbara vidareutvecklingar** \
+  Finns inte många
 
 
 ## Att göra
 - [x] **Bakgrund** - Problem framgår inte. Behov framgår inte. Kontext framgår inte.
-- [x] **Sammhällskoppling** - Det framgår inte hur detta hjälper samhället.
 
-- [ ] **Språk** - ***VI*** måste tas bor måste tas bort
+- [ ] **Related work** \
+  Finns ej
 
-- [x] **Referenser** - Finns men många av de är [?]
-- [ ] **Referenser** - "actor-modellen" behöver en referens
-- [ ] **Referenser** - Kombinera inte fotnoter med [X]
+- [x] **Sammhällskoppling** \
+  Det framgår inte hur detta hjälper samhället.
+
+- [ ] **Hållbarhetsaspekter** \
+  Finns ej
+
+- [x] **Etiska aspekter** \
+  Finns ej
+
+- [x] **Tänkbara vidareutvecklingar** olika typer av mat
+- [x] **Tänkbara vidareutvecklingar** flera myrkolonier
+- [x] **Tänkbara vidareutvecklingar** \
+  interaktion i realtid
+- [x] **Tänkbara vidareutvecklingar** \
+  Soldater / mer applicerbara varianter
+
+- [x] **Språk** \
+   ***VI*** måste tas bor måste tas bort
+
+- [x] **Referenser** \
+   Finns men många av de är [?]
+- [x] **Referenser** \
+  Kombinera inte fotnoter med [X]
